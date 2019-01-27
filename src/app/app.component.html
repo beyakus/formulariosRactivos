@@ -1,0 +1,57 @@
+<h2>Formularios reactivos</h2>
+
+<form [formGroup]="formAlta" (ngSubmit)="guardarForm()">
+  <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
+  <input class="form-control" type="text" placeholder="Usuario" formControlName="usuario">
+  <input class="form-control" type="password" placeholder="Contraseña" formControlName="password">
+  <button class="btn btn-info" type="submit">Agregar</button>
+  <button class="btn btn-warning" type="button" (click)="limpiarForm()">Limpiar</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>Nombre</td>
+      <td>Usuario</td>
+      <td>Operacion</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tu of tablaUsuario; let i = index ">
+      <td>{{ tu.nombre }}</td>
+      <td>{{ tu.usuario }}</td>
+      <td><button class="btn btn-danger" (click)="eliminarRegistro(i)">Eliminar</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<select class="form-control" (change)="seleccionOpcion($event)">
+  <option value="false">Selecciona una opcion</option>
+  <option *ngFor="let o of opc" [value]="o.area">{{ o.titulo }}</option>
+</select>
+
+
+<div [ngSwitch]="nombreArea">
+  <section *ngSwitchCase="'rh'">
+    <app-rh></app-rh>
+  </section>
+  <section *ngSwitchCase="'ti'">
+    <h3>Sistemas</h3>
+  </section>
+  <section *ngSwitchCase="'almacen'">
+    <h3>Almacen</h3>
+  </section>
+</div>
+
+
+<!-- <section *ngIf="nombreArea != '' && nombreArea == 'rh'">
+  <h3>Seccion para RH</h3>
+</section>
+
+<section *ngIf="nombreArea != '' && nombreArea == 'ti'">
+  <h3>Sistemas</h3>
+</section>
+
+<section *ngIf="nombreArea != '' && nombreArea == 'almacen'">
+  <h3>Almacen</h3>
+</section> -->
